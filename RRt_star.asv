@@ -1,0 +1,80 @@
+%%--------------------------------------------------------------------
+
+% Module:  RRT_star.m
+
+% This module contains all the computations related to RRT Star
+
+% Search Algorithm
+
+% Developed by Rishi.Khajuriwala@ WPI RBE.
+
+%%--------------------------------------------------------------------*/
+
+clc;
+clear all;
+close all;
+
+grid_xmax = 10;
+grid_ymax = 10;
+grid = [10,10];
+Obstacle1 = [5,1.5,2,2];
+Obstacle2 = [2,5,2,2];
+Obstacle3 = [7.5,2,2,2];
+Obstacle4 = [8,7,2,2];
+
+x_start.point = [0 0];
+x_start.cost = 0;
+x_start.parent = 0;
+x_goal.point = [9 9];
+x_goal.cost = 0;
+
+nodes(1) = x_start;
+figure;
+axis([0 grid(1) 0 grid(2)])
+rectangle('Position',Obstacle1,'FaceColor',[0 0 0])
+
+hold on
+rectangle('Position',Obstacle2,'FaceColor',[0 0 0])
+rectangle('Position',Obstacle3,'FaceColor',[0 0 0])
+rectangle('Position',Obstacle4,'FaceColor',[0 0 0])
+
+n_nodes = 100; %No of nodes
+
+
+% Sampling Function
+for j = 1: length(n_nodes)
+   x_rand = [round(rand(1)*grid(1)) round(rand(1)*grid(2))];
+   plot(x_rand(1),x_rand(2),'x','Color',[0 0 0]);
+    
+end
+
+
+
+
+%% Steering
+function [new_X] = Steer(rand_x,nearest_node,min_node,n)
+new_X = [0 0];
+
+if min_node >= n
+   new_X(1) =  nearest_node(1) + ((rand_x(1)))
+    
+    
+end
+
+end
+
+
+%% Nearest Neighor
+%Given a graph G(V,E) and point x, this function gives the 
+%Euclidean Distance
+
+function [distance] = NearestNeighorDist(x,y)
+distance = sqrt((x(1)-y(1)^2)+(x(2)-y(2)^2));
+end
+
+%% Near Vertices:
+
+
+
+%% Collision Test/ Obstacle Free
+
