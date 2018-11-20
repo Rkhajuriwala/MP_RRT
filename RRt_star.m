@@ -22,7 +22,7 @@ Obstacle4 = [8,7,2,2];
 
 x_start.point = [0 0];
 x_goal.point = [9 9];
-
+n = 200;
 nodes(1) = x_start;
 figure;
 axis([0 grid(1) 0 grid(2)]);
@@ -47,6 +47,16 @@ for j = 1: n_nodes
             break
         end
     end
+    dist_closet_nodes = [];
+    for k = 1:ld_nodes
+       dist_closet_nodes = [dist_closet_nodes;NearestNeighorDist(nodes(k).point,x_rand)]; 
+    end
+    
+    [min_dis,idcs] = min(dist_closet_nodes);
+    x_near = nodes(idcs);
+    
+    x_new.point = Steer(x_rand,x_near.point,min_dis,n);
+    plot(x_new.point);
 end
 
 
